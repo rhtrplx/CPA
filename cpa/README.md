@@ -1,3 +1,3 @@
 # cpa
 
-A new Flutter project.
+L'application CPA qui tourne sur les smartphones remis aux concurrents

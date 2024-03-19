@@ -115,7 +115,7 @@
 				<input type="submit" value="S'inscrire"><br />
 				<input type="hidden" name="valide" value="valide">
 				<?php 
-				$ressource=$this->inscrireMembre($pseudo,$email);
+				$ressource=$this->inscrireMembre( $Nom,$email);
 				
 				?>
 				

@@ -1,0 +1,147 @@
+    body {
+        background-image: url('./images/image.jpg') ;
+        image-resolution: 1920 * 1080;
+        background-color:  green ;
+    }
+
+    nav.navbar.navbar-expand-sm.bg-dark.navbar-dark {
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+    top: 0;
+
+    }
+
+
+    div.entete{
+
+    text-align: center; 
+    color: #002008;
+    padding: 50px;
+    border-top-style: hidden;
+    border-right-style: dotted;
+    border-bottom-style: dotted;
+    border-left-style: dotted;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-width: 0px;
+    /*border-color: grey;*/
+    /* background-color: RGBA(10, 10, 10, 0.9); */
+    }
+
+    /* paramètres de la caméra */
+    iframe.camera {
+        width: 640px;
+        height: 480px;
+        margin-left:20%;
+        /*zoom: 0%;*/
+    }
+/* barre de menu*/
+.nav-item {
+    background-color: #006E1B;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    -webkit-transition: background-color 500ms;
+    transition: background-color 500ms;
+}
+
+.nav-item:hover {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover { 
+    color: #002008;
+}
+
+    .video {
+    overflow:hidden;
+    padding-bottom:56.25%; 
+    position:relative;
+    height:0;
+    }
+
+    .video iframe {
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    }
+
+
+    * {
+    box-sizing: border-box;
+    }
+
+    body {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    }
+
+
+    /* Create three unequal columns that floats next to each other */
+    .column {
+    /*float: left;*/
+    padding: 10px;
+    border-style: dotted;
+    border-width: 2px;
+    border-color: grey;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    /*background-color: #2B262D ;*/
+    /* background-color: RGBA(10, 10, 10, 0.9); */
+    
+    }
+
+    /* Left and right column */
+    .column.side {
+    width: 15%;
+    color: #002008;
+
+    }
+
+    /*pour que toutes les images s'adaptent Ã  la bonne taille*/
+    .column img{
+    height: auto;
+    max-width: 100%;
+    display: block;
+    }
+
+
+    /* Middle column */
+    .column.middle {
+    width: 64%;
+    color: #002008;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+
+
+
+
+
+    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+    }
+
+
+    /* Pied de page*/
+    div.credits {
+    color:#002008;
+    margin-left: 12px;
+    }

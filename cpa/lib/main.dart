@@ -69,9 +69,6 @@ Future<void> _deleteFileIfExists(String filePath) async {
 Future<void> add_to_follow_file(
     double longitude, double latitude, String time) async {
   try {
-    // Obtain the directory where the app can write data.
-    // final directory = await getApplicationDocumentsDirectory();
-    // final String filePath = '${directory.path}/follow_file.txt';
     Directory? directory =
         await getExternalStorageDirectory(); // Obtient le répertoire de stockage externe, mais peut être null
 
@@ -79,8 +76,12 @@ Future<void> add_to_follow_file(
         "${directory?.path}/follow_file.txt"; // Construit le chemin du fichier
 
     print(filePath);
-    final String content =
-        'Heure: $time, Longitude: $longitude, Latitude: $latitude\n';
+
+    // Format the longitude and latitude
+    String formattedLongitude = longitude.abs().toStringAsFixed(7);
+    String formattedLatitude = latitude.abs().toStringAsFixed(7);
+
+    final String content = '$time, $formattedLongitude, $formattedLatitude\n';
     final file = File(filePath);
 
     // Append the content to the file.
@@ -109,6 +110,7 @@ Future<void> add_to_result_file(
     print(filePath);
     final String content =
         'Nom waypoint: $waypointName, Heure: $time, Longitude: $longitude, Latitude: $latitude\n';
+    // 'Nom waypoint: $waypointName, Heure: $time, Longitude: $longitude, Latitude: $latitude\n';
     final file = File(filePath);
 
     // Append the content to the file.
@@ -524,6 +526,7 @@ class _DisplayRacePageState extends State<DisplayRacePage> {
       getCurrentWaypointName(
           position.latitude, position.longitude, currentTime);
       add_to_follow_file(position.longitude, position.latitude, currentTime);
+      uploadDataToDatabase(id_course, id_concurrent);
     } catch (e) {
       print("Error updating live coordinates: $e");
     }
@@ -664,9 +667,15 @@ Future<void> uploadDataToDatabase(int idCourse, int idConcurrent) async {
   // execute this command to update instead of inserting every time
 
   String query = """
+    UPDATE resultats
+    SET suivi = '$followContent', performance = '$resultContent'
+    WHERE idConcurrent = $idConcurrent AND idCourse = $idCourse;
+    
     INSERT INTO resultats (idCourse, idConcurrent, suivi, performance)
-    VALUES ($idCourse, $idConcurrent, '$followContent', '$resultContent')
-    ON DUPLICATE KEY UPDATE suivi = '$followContent', performance = '$resultContent';
+    SELECT $idCourse, $idConcurrent, '$followContent', '$resultContent'
+    WHERE NOT EXISTS (
+      SELECT 1 FROM resultats WHERE idConcurrent = $idConcurrent AND idCourse = $idCourse
+    );
   """;
 
   await conn.execute(query);
